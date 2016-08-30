@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
+ * nohup am instrument -w -r -e debug false -e class os.ransj.thundership.ThunderShipRunner os.ransj.thundership.test/android.support.test.runner.AndroidJUnitRunner >/dev/null 2>&1 &
+ *
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 @RunWith(AndroidJUnit4.class)
