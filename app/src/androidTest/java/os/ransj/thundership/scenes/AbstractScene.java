@@ -1,4 +1,4 @@
-package os.ransj.thundership;
+package os.ransj.thundership.scenes;
 
 import android.graphics.Bitmap;
 
@@ -7,6 +7,8 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import os.ransj.thundership.PixelPoint;
 
 /**
  * Created by ransj on 8/27/16.

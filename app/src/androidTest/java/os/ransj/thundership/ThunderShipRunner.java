@@ -11,6 +11,8 @@ import android.util.Log;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import os.ransj.thundership.scenes.ScreenshotAnalysis;
+
 /**
  * nohup am instrument -w -r -e debug false -e class os.ransj.thundership.ThunderShipRunner os.ransj.thundership.test/android.support.test.runner.AndroidJUnitRunner >/dev/null 2>&1 &
  *

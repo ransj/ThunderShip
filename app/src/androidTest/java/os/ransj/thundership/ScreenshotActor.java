@@ -6,6 +6,8 @@ import android.os.Message;
 import android.support.test.uiautomator.UiDevice;
 import android.view.Gravity;
 
+import os.ransj.thundership.scenes.Scene;
+
 /**
  * Created by ransj on 8/27/16.
  */

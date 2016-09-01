@@ -1,4 +1,4 @@
-package os.ransj.thundership;
+package os.ransj.thundership.scenes;
 
 import android.graphics.Bitmap;
 import android.os.Handler;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by ransj on 8/27/16.
  */
-final class ScreenshotAnalysis implements Handler.Callback {
+public final class ScreenshotAnalysis implements Handler.Callback {
     private static final int MSG_INIT = 99;
     private static final int MSG_ANALYSIS = 100;
     private ScreenshotAnalysisListener mListener;
@@ -83,7 +83,7 @@ final class ScreenshotAnalysis implements Handler.Callback {
     }
 
     public interface ScreenshotAnalysisListener {
-        public void onScreenshotAnalysised(int scene);
+        void onScreenshotAnalysised(int scene);
     }
 
 }

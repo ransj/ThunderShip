@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Created by ransj on 8/27/16.
  */
-final class PixelPoint {
+public final class PixelPoint {
     private int mX;
     private int mY;
     private int mValue;

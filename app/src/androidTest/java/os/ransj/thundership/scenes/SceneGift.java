@@ -1,4 +1,5 @@
-package os.ransj.thundership;
+package os.ransj.thundership.scenes;
+
 
 /**
  * 无尽模式领取奖励
