@@ -28,7 +28,7 @@ import java.util.Random;
  * Created by ransj on 8/27/16.
  */
 @RunWith(AndroidJUnit4.class)
-public class ColorPicker {
+public class ColorPickerRunner {
     private static final int POINT_NUM = 30;
     private static final int POINT_HIT_NUM = 20;
     private static final int CHECK_TIMES = 5;
@@ -47,7 +47,7 @@ public class ColorPicker {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String scene = intent.getStringExtra("scene");
-                Log.d("ColorPicker", "onReceive broadcast, scene "+scene);
+                Log.d("ColorPickerRunner", "onReceive broadcast, scene "+scene);
                 File config = new File(Environment.getExternalStorageDirectory(), "ThunderShip/config/" + scene + ".txt");
                 ensureFileExist(config);
                 int x = 0;
@@ -88,7 +88,7 @@ public class ColorPicker {
                 int py = random.nextInt(height) + y;
                 int color = image.getPixel(px, py);
                 points.add(new PixelPoint(px, py, color));
-//                Log.d("ColorPicker", px + ", " + py + ", " + color);
+//                Log.d("ColorPickerRunner", px + ", " + py + ", " + color);
             }
             check(device, points, 1, x, y, width, height, config);
         } else {
@@ -112,12 +112,12 @@ public class ColorPicker {
                     for (PixelPoint point : points) {
                         array.put(point.toJSONObject());
                     }
-                    Log.e("ColorPicker", array.toString());
+                    Log.e("ColorPickerRunner", array.toString());
                 } else {
                     check(device, hits, times, x, y, width, height, config);
                 }
             } else {
-                Log.d("ColorPicker", "check failed, try again " + size);
+                Log.d("ColorPickerRunner", "check failed, try again " + size);
                 pick(device, POINT_NUM, x, y, width, height, config);
             }
         } else {
