@@ -19,6 +19,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
     private HandlerThread mThread;
     private Handler mHandler;
     private List<Scene> mScenes;
+    private List<Scene> mChanges;
     private int mScene = -1;
 
     public ScreenshotAnalysis(ScreenshotAnalysisListener listener) {
@@ -69,17 +70,26 @@ public final class ScreenshotAnalysis implements Handler.Callback {
         mScenes.add(new SceneReborn());
         mScenes.add(new SceneGift());
         mScenes.add(new SceneResult());
+        mChanges = new ArrayList<>();
     }
 
     private int analysisBitmap(Bitmap image) {
+        int id = -1;
         for (Scene scene : mScenes) {
+            mChanges.add(scene);
             if (scene.analysis(image)) {
-                image.recycle();
-                return scene.id();
+                id = scene.id();
+                break;
             }
         }
         image.recycle();
-        return -1;
+        // change index, if hit
+        if (id != -1) {
+            mScenes.removeAll(mChanges);
+            mScenes.addAll(mChanges);
+            mChanges.clear();
+        }
+        return id;
     }
 
     public interface ScreenshotAnalysisListener {

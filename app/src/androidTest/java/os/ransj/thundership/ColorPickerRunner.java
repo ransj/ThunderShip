@@ -1,24 +1,24 @@
 package os.ransj.thundership;
 
 import android.app.Instrumentation;
-import android.app.UiAutomation;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiDevice;
 import android.util.Log;
 
+import com.google.common.io.Files;
+
 import org.json.JSONArray;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,57 +29,75 @@ import java.util.Random;
  */
 @RunWith(AndroidJUnit4.class)
 public class ColorPickerRunner {
-    private static final int POINT_NUM = 30;
-    private static final int POINT_HIT_NUM = 20;
-    private static final int CHECK_TIMES = 5;
-    private UiDevice mDevice;
-    private UiAutomation mAutomation;
-    private boolean mIsRunning = true;
+    private static final int POINT_NUM = 100;
 
     @Test
     public void testPicker() {
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
-        mDevice = UiDevice.getInstance(instrumentation);
-        mAutomation = instrumentation.getUiAutomation();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("os.ransj.color.picker");
-        InstrumentationRegistry.getContext().registerReceiver(new BroadcastReceiver() {
+        UiDevice mDevice = UiDevice.getInstance(instrumentation);
+        File root = new File(Environment.getExternalStorageDirectory(), "ThunderShip/screenShot/");
+        File[] files = root.listFiles(new FilenameFilter() {
             @Override
-            public void onReceive(Context context, Intent intent) {
-                String scene = intent.getStringExtra("scene");
-                Log.d("ColorPickerRunner", "onReceive broadcast, scene "+scene);
-                File config = new File(Environment.getExternalStorageDirectory(), "ThunderShip/config/" + scene + ".txt");
-                ensureFileExist(config);
-                int x = 0;
-                int y = 0;
-                int width = mDevice.getDisplayWidth();
-                int height = mDevice.getDisplayHeight();
-                if ("MainEntry".equals(scene)) {
-                    height = 500;
-                    y = mDevice.getDisplayHeight() - height;
-                } else if ("InfiniteFriendRace".equals(scene)) {
-                    //DO NOTHING
-                } else if ("InfiniteFriendRank".equals(scene)) {
-                    height = 500;
-                    y = mDevice.getDisplayHeight() - height;
-                } else if ("InfiniteFriendPick".equals(scene)) {
-                    height = 400;
-                    y = mDevice.getDisplayHeight() - height;
-                } else if ("InfiniteBeforeBuy".equals(scene)) {
-                } else if ("InfiniteReborn".equals(scene)) {
-                } else if ("InfinitePrize".equals(scene)) {
-                } else if ("InfiniteResult".equals(scene)) {
-                }
-                pick(mDevice, POINT_NUM, x, y, width, height, config);
+            public boolean accept(File dir, String filename) {
+                return filename.endsWith(".png");
             }
-        }, filter);
-        for (; mIsRunning; ) {
-            Thread.yield();
+        });
+        if(files == null || files.length <= 0){
+            throw new RuntimeException("请把截屏文件放在"+root.getAbsolutePath());
+        }
+        for (File file : files) {
+            String scene = file.getName();
+            String configName = null;
+            int x = 0;
+            int y = 0;
+            int width = mDevice.getDisplayWidth();
+            int height = mDevice.getDisplayHeight();
+            if (Constants.IMAGE_NAME_MAIN_ENTRY.equals(scene)) {
+                height = 500;
+                y = mDevice.getDisplayHeight() - height;
+                configName = Constants.CONFIG_NAME_MAIN_ENTRY;
+            } else if (Constants.IMAGE_NAME_FRIEND_RACE.equals(scene)) {
+                //DO NOTHING
+                configName = Constants.CONFIG_NAME_FRIEND_RACE;
+            } else if (Constants.IMAGE_NAME_FRIEND_RANK.equals(scene)) {
+                height = 650;
+                y = mDevice.getDisplayHeight() - height;
+                configName = Constants.CONFIG_NAME_FRIEND_RANK;
+            } else if (Constants.IMAGE_NAME_FRIEND_PICK.equals(scene)) {
+                height = 400;
+                y = mDevice.getDisplayHeight() - height;
+                configName = Constants.CONFIG_NAME_FRIEND_PICK;
+            } else if (Constants.IMAGE_NAME_BEFORE_BUY.equals(scene)) {
+                //NO NOTHING
+                configName = Constants.CONFIG_NAME_BEFORE_BUY;
+            } else if (Constants.IMAGE_NAME_REBORN.equals(scene)) {
+                x = 256;
+                y = 666;
+                width = 150;
+                height = 600;
+                configName = Constants.CONFIG_NAME_REBORN;
+            } else if (Constants.IMAGE_NAME_PRIZE.equals(scene)) {
+                x = 480;
+                y = mDevice.getDisplayHeight() - 810;
+                width = mDevice.getDisplayWidth() - 480*2;
+                height = 140;
+                configName = Constants.CONFIG_NAME_PRIZE;
+            } else if (Constants.IMAGE_NAME_RESULT.equals(scene)) {
+                y = mDevice.getDisplayHeight()>>1;
+                height = mDevice.getDisplayHeight()>>1;
+                configName = Constants.CONFIG_NAME_RESULT;
+            } else {
+                Log.d("ColorPickerRunner", "error handler image "+scene);
+                continue;
+            }
+            Bitmap image = BitmapFactory.decodeFile(file.getAbsolutePath());
+            File config = new File(Environment.getExternalStorageDirectory(), "ThunderShip/config/"+configName);
+            ensureFileExist(config);
+            pick(image, POINT_NUM, x, y, width, height, config);
         }
     }
 
-    private void pick(UiDevice device, int num, int x, int y, int width, int height, File config) {
-        Bitmap image = mAutomation.takeScreenshot();
+    private void pick(Bitmap image, int num, int x, int y, int width, int height, File config) {
         if (image != null) {
             List<PixelPoint> points = new ArrayList<>();
             Random random = new Random(System.currentTimeMillis());
@@ -90,35 +108,16 @@ public class ColorPickerRunner {
                 points.add(new PixelPoint(px, py, color));
 //                Log.d("ColorPickerRunner", px + ", " + py + ", " + color);
             }
-            check(device, points, 1, x, y, width, height, config);
-        } else {
-            throw new RuntimeException("获取屏幕截图失败");
-        }
-    }
-
-    private void check(UiDevice device, List<PixelPoint> points, int times, int x, int y, int width, int height, File config) {
-        Bitmap image = mAutomation.takeScreenshot();
-        if (image != null) {
-            List<PixelPoint> hits = new ArrayList<>();
+            JSONArray array = new JSONArray();
             for (PixelPoint point : points) {
-                if (point.hit(image)) {
-                    hits.add(point);
-                }
+                array.put(point.toJSONObject());
             }
-            int size = hits.size();
-            if (size >= POINT_HIT_NUM) {
-                if (++times > CHECK_TIMES) {
-                    JSONArray array = new JSONArray();
-                    for (PixelPoint point : points) {
-                        array.put(point.toJSONObject());
-                    }
-                    Log.e("ColorPickerRunner", array.toString());
-                } else {
-                    check(device, hits, times, x, y, width, height, config);
-                }
-            } else {
-                Log.d("ColorPickerRunner", "check failed, try again " + size);
-                pick(device, POINT_NUM, x, y, width, height, config);
+            String jsonStr = array.toString();
+            Log.e("ColorPickerRunner", jsonStr);
+            try {
+                Files.asCharSink(config, Charset.forName("UTF-8")).write(jsonStr);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } else {
             throw new RuntimeException("获取屏幕截图失败");

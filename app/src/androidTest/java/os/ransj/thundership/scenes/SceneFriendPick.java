@@ -1,17 +1,17 @@
 package os.ransj.thundership.scenes;
 
 
+import os.ransj.thundership.Constants;
 
 /**
  * 无尽模式选择机友
  * Created by ransj on 8/27/16.
  */
 final class SceneFriendPick extends AbstractScene {
-    private static final String JSON = "[{\"x\":22,\"y\":880,\"value\":-16244670},{\"x\":64,\"y\":256,\"value\":-4327433},{\"x\":729,\"y\":635,\"value\":-16768942},{\"x\":213,\"y\":319,\"value\":-15717030},{\"x\":542,\"y\":156,\"value\":-15133647},{\"x\":1242,\"y\":1855,\"value\":-5429207},{\"x\":370,\"y\":1622,\"value\":-16765606},{\"x\":1351,\"y\":1246,\"value\":-16228931},{\"x\":695,\"y\":2358,\"value\":-12433078},{\"x\":358,\"y\":1787,\"value\":-16235124},{\"x\":305,\"y\":2187,\"value\":-11383478},{\"x\":1096,\"y\":2341,\"value\":-13553350},{\"x\":391,\"y\":1779,\"value\":-16754276},{\"x\":1159,\"y\":2325,\"value\":-10260101},{\"x\":1081,\"y\":1460,\"value\":-16768950},{\"x\":303,\"y\":1402,\"value\":-16767918},{\"x\":513,\"y\":974,\"value\":-14059058},{\"x\":532,\"y\":880,\"value\":-16766886},{\"x\":814,\"y\":1908,\"value\":-16764565},{\"x\":896,\"y\":1307,\"value\":-4345303},{\"x\":1168,\"y\":1007,\"value\":-10263222},{\"x\":165,\"y\":1018,\"value\":-4338978},{\"x\":658,\"y\":270,\"value\":-14068324},{\"x\":848,\"y\":898,\"value\":-1655280},{\"x\":448,\"y\":949,\"value\":-16241309},{\"x\":798,\"y\":2318,\"value\":-6530816},{\"x\":74,\"y\":593,\"value\":-15714965}]";
 
     @Override
-    public String getPointJSONString() {
-        return JSON;
+    public String getConfigFileName() {
+        return Constants.CONFIG_NAME_FRIEND_PICK;
     }
 
     @Override

@@ -17,6 +17,7 @@ public final class PixelPoint {
         mX = x;
         mY = y;
         mValue = value;
+//        13681883034
     }
 
     public boolean hit(Bitmap image) {

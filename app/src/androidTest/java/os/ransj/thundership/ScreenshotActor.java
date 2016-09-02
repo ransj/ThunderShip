@@ -43,25 +43,25 @@ final class ScreenshotActor implements Handler.Callback {
                 click(325, 163, Gravity.LEFT, Gravity.BOTTOM);
                 break;
             case Scene.INFINITE_FRIEND_RACE:
-                click(mScreenWidth >> 1, 1258, Gravity.LEFT, Gravity.TOP);
+                click(mScreenWidth >> 1, 400, Gravity.LEFT, Gravity.BOTTOM);
                 break;
             case Scene.INFINITE_FRIEND_RANK:
-                click(mScreenWidth >> 1, 144, Gravity.LEFT, Gravity.BOTTOM);
+                click(mScreenWidth >> 1, 280, Gravity.LEFT, Gravity.BOTTOM);
                 break;
             case Scene.INFINITE_FRIEND_PICK:
-                click(mScreenWidth >> 1, 144, Gravity.LEFT, Gravity.BOTTOM);
+                click(mScreenWidth >> 1, 280, Gravity.LEFT, Gravity.BOTTOM);
                 break;
             case Scene.INFINITE_BUY:
-                click(mScreenWidth >> 1, 144, Gravity.LEFT, Gravity.BOTTOM);
+                click(mScreenWidth >> 1, 280, Gravity.LEFT, Gravity.BOTTOM);
                 break;
             case Scene.INFINITE_REBORN:
-                click(mScreenWidth >> 2, 1336, Gravity.LEFT, Gravity.TOP);
+                click(mScreenWidth >> 2, 1136, Gravity.LEFT, Gravity.BOTTOM);
                 break;
             case Scene.INFINITE_PRIZE:
-                click(mScreenWidth >> 1, 657, Gravity.LEFT, Gravity.BOTTOM);
+                click(mScreenWidth >> 1, 737, Gravity.LEFT, Gravity.BOTTOM);
                 break;
             case Scene.INFINITE_RESULT:
-                click(mScreenWidth >> 2, 250, Gravity.LEFT, Gravity.BOTTOM);
+                click(mScreenWidth >> 2, 265, Gravity.LEFT, Gravity.BOTTOM);
                 break;
         }
         return true;
