@@ -43,11 +43,10 @@ final class ScreenshotTaker implements Handler.Callback {
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case MSG_START:
-//                Log.d("ThunderShipRunner", "start take screenshot");
                 long start = System.currentTimeMillis();
                 Bitmap result = mDevice.takeScreenshot();
-//                Log.d("ThunderShipRunner", "end take screenshot, result " + (result == null) + ", cost time " + (System.currentTimeMillis() - start));
                 if (result != null) {
+                    Log.d("ThunderShipRunner", "take screenshot, cost time " + (System.currentTimeMillis() - start));
                     mListener.onScreenShotToken(result);
                 }
                 for (; start + mInterval > System.currentTimeMillis(); ) {
