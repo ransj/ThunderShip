@@ -36,19 +36,10 @@ public class Constants {
      * 战斗结果
      */
     public static final String IMAGE_NAME_RESULT = "result.png";
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 战斗中
+     */
+    public static final String IMAGE_NAME_BATTLE = "battle.png";
 
 
     /**
@@ -83,5 +74,12 @@ public class Constants {
      * 战斗结果
      */
     public static final String CONFIG_NAME_RESULT = "result.txt";
+    /**
+     * 战斗中
+     */
+    public static final String CONFIG_NAME_BATTLE = "battle.txt";
+
+
+    public static final int SHIP_SIZE = 180;
 
 }

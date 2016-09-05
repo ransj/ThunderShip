@@ -11,7 +11,7 @@ import os.ransj.thundership.scenes.Scene;
 /**
  * Created by ransj on 8/27/16.
  */
-final class ScreenshotActor implements Handler.Callback {
+final class SceneActor implements Handler.Callback {
     private HandlerThread mThread;
     private Handler mHandler;
     private int mMarginBottom;
@@ -19,7 +19,7 @@ final class ScreenshotActor implements Handler.Callback {
     private int mScreenWidth;
     private int mScreenHeight;
 
-    public ScreenshotActor(UiDevice device, int marginBottom){
+    public SceneActor(UiDevice device, int marginBottom){
         mMarginBottom = marginBottom;
         mDevice = device;
         mScreenWidth = device.getDisplayWidth();
@@ -27,7 +27,7 @@ final class ScreenshotActor implements Handler.Callback {
     }
 
     public void start() {
-        mThread = new HandlerThread("ScreenshotActor");
+        mThread = new HandlerThread("SceneActor");
         mThread.start();
         mHandler = new Handler(mThread.getLooper(), this);
     }

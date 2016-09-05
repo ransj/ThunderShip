@@ -48,15 +48,18 @@ public final class ScreenshotAnalysis implements Handler.Callback {
                 Bitmap image = (Bitmap) msg.obj;
                 int scene = analysisBitmap(image);
                 Log.d("ThunderShipRunner", "success analysis scene, cost time " + (System.currentTimeMillis() - start));
-                if (scene >= 0 && mScene != scene) {
+                if (Scene.INFINITE_BATTLE == scene) {
                     mScene = scene;
-                    mListener.onScreenshotAnalysised(scene);
+                    mListener.onBattle(image);
+                } else if (scene >= 0 && mScene != scene) {
+                    mScene = scene;
+                    mListener.onSceneAnalysised(scene);
                     // change index, if hit
                     mScenes.removeAll(mChanges);
                     mScenes.addAll(mChanges);
                     mChanges.clear();
+                    image.recycle();
                 }
-                image.recycle();
                 break;
             case MSG_INIT:
                 init();
@@ -75,6 +78,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
         mScenes.add(new SceneReborn());
         mScenes.add(new SceneGift());
         mScenes.add(new SceneResult());
+        mScenes.add(new SceneBattle());
         mChanges = new ArrayList<>();
     }
 
@@ -90,8 +94,15 @@ public final class ScreenshotAnalysis implements Handler.Callback {
         return id;
     }
 
+    public int getCurrentScene() {
+        return mScene;
+    }
+
     public interface ScreenshotAnalysisListener {
-        void onScreenshotAnalysised(int scene);
+
+        void onSceneAnalysised(int scene);
+
+        void onBattle(Bitmap image);
     }
 
 }

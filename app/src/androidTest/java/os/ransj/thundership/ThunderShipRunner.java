@@ -2,7 +2,9 @@ package os.ransj.thundership;
 
 
 import android.app.Instrumentation;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.PowerManager;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiDevice;
@@ -11,6 +13,11 @@ import android.util.Log;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import os.ransj.thundership.actions.BattleActor;
+import os.ransj.thundership.scenes.Scene;
 import os.ransj.thundership.scenes.ScreenshotAnalysis;
 
 /**
@@ -21,18 +28,22 @@ import os.ransj.thundership.scenes.ScreenshotAnalysis;
 @RunWith(AndroidJUnit4.class)
 public class ThunderShipRunner implements ScreenshotTaker.ScreenshotListener, ScreenshotAnalysis.ScreenshotAnalysisListener {
     private ScreenshotAnalysis mAnalysis;
-    private ScreenshotActor mActor;
+    private SceneActor mSceneActor;
+    private BattleActor mBattleActor;
 
     @Test
     public void startTest() {
         Instrumentation instrumentation= InstrumentationRegistry.getInstrumentation();
         UiDevice device = UiDevice.getInstance(instrumentation);
         int marginBottom = device.getDisplayHeight() - InstrumentationRegistry.getContext().getResources().getDisplayMetrics().heightPixels;
-        mActor = new ScreenshotActor(device, marginBottom);
-        mActor.start();
+        mSceneActor = new SceneActor(device, marginBottom);
+        mSceneActor.start();
         new ScreenshotTaker(instrumentation.getUiAutomation(), 5000, this).start();
         mAnalysis = new ScreenshotAnalysis(this);
         mAnalysis.start();
+        mBattleActor = new BattleActor(device);
+        mBattleActor.start();
+        blackScreen();
         for (;;) {
             Thread.yield();
         }
@@ -44,9 +55,31 @@ public class ThunderShipRunner implements ScreenshotTaker.ScreenshotListener, Sc
     }
 
     @Override
-    public void onScreenshotAnalysised(int scene) {
-        Log.d("ThunderShipRunner", "onScreenshotAnalysised " + scene);
-        mActor.dealSence(scene);
+    public void onSceneAnalysised(int scene) {
+        Log.d("ThunderShipRunner", "onSceneAnalysised " + scene);
+        mSceneActor.dealSence(scene);
+    }
+
+    @Override
+    public void onBattle(Bitmap image) {
+        mBattleActor.dealBattle(image);
+    }
+
+    private void blackScreen() {
+        try {
+            Context ctx = InstrumentationRegistry.getContext();
+            PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
+            Method method = PowerManager.class.getDeclaredMethod("setBacklightBrightness", int.class);
+            method.setAccessible(true);
+            //调用实现PowerManagerService的setBacklightBrightness
+            method.invoke(pm, 0);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
 }

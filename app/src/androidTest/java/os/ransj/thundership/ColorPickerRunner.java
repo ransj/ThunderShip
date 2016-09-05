@@ -70,6 +70,12 @@ public class ColorPickerRunner {
             } else if (Constants.IMAGE_NAME_BEFORE_BUY.equals(scene)) {
                 //NO NOTHING
                 configName = Constants.CONFIG_NAME_BEFORE_BUY;
+            } else if (Constants.IMAGE_NAME_BATTLE.equals(scene)) {
+                x = mDevice.getDisplayWidth() - 405;
+                y = 235;
+                width = 140;
+                height = 140;
+                configName = Constants.CONFIG_NAME_BATTLE;
             } else if (Constants.IMAGE_NAME_REBORN.equals(scene)) {
                 x = 256;
                 y = 666;

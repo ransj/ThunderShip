@@ -15,6 +15,7 @@ public interface Scene {
     int INFINITE_REBORN = 5;
     int INFINITE_PRIZE = 6;
     int INFINITE_RESULT = 7;
+    int INFINITE_BATTLE = 8;
 
     boolean analysis(Bitmap image);
 
