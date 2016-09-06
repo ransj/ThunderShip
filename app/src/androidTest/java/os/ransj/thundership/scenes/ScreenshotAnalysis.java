@@ -51,7 +51,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
                 if (Scene.INFINITE_BATTLE == scene) {
                     mScene = scene;
                     mListener.onBattle(image);
-                } else if (scene >= 0 && mScene != scene) {
+                } else if (scene >= 0) {
                     mScene = scene;
                     mListener.onSceneAnalysised(scene);
                     // change index, if hit
@@ -79,6 +79,8 @@ public final class ScreenshotAnalysis implements Handler.Callback {
         mScenes.add(new SceneGift());
         mScenes.add(new SceneResult());
         mScenes.add(new SceneBattle());
+        mScenes.add(new SceneDailyAward());
+        mScenes.add(new SceneNotice());
         mChanges = new ArrayList<>();
     }
 

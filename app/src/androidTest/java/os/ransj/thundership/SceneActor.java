@@ -63,6 +63,12 @@ final class SceneActor implements Handler.Callback {
             case Scene.INFINITE_RESULT:
                 click(mScreenWidth >> 2, 265, Gravity.LEFT, Gravity.BOTTOM);
                 break;
+            case Scene.INFINITE_DAILYAWARD:
+                click(mScreenWidth >> 1, 540, Gravity.LEFT, Gravity.BOTTOM);
+                break;
+            case Scene.INFINITE_NOTICE:
+                click(mScreenWidth >> 1, 570, Gravity.LEFT, Gravity.BOTTOM);
+                break;
         }
         return true;
     }

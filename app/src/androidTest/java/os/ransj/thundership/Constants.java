@@ -40,7 +40,14 @@ public class Constants {
      * 战斗中
      */
     public static final String IMAGE_NAME_BATTLE = "battle.png";
-
+    /**
+     * 每日奖励
+     */
+    public static final String IMAGE_NAME_DAILY_AWARD = "dailyAward.png";
+    /**
+     * 公告
+     */
+    public static final String IMAGE_NAME_NOTICE = "notice.png";
 
     /**
      * 首页文件
@@ -78,6 +85,14 @@ public class Constants {
      * 战斗中
      */
     public static final String CONFIG_NAME_BATTLE = "battle.txt";
+    /**
+     * 每日奖励
+     */
+    public static final String CONFIG_NAME_DAILY_AWARD = "dailyAward.txt";
+    /**
+     * 公告
+     */
+    public static final String CONFIG_NAME_NOTICE = "notice.txt";
 
 
     public static final int SHIP_SIZE = 180;

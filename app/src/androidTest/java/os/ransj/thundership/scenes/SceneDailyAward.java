@@ -3,18 +3,18 @@ package os.ransj.thundership.scenes;
 import os.ransj.thundership.Constants;
 
 /**
- * Created by ransj on 9/3/16.
+ * Created by ransj on 9/6/16.
  */
-class SceneBattle extends AbstractScene {
+class SceneDailyAward extends AbstractScene {
 
     @Override
     public String getConfigFileName() {
-        return Constants.CONFIG_NAME_BATTLE;
+        return Constants.CONFIG_NAME_DAILY_AWARD;
     }
 
     @Override
     public int id() {
-        return INFINITE_BATTLE;
+        return Scene.INFINITE_DAILYAWARD;
     }
 
 }

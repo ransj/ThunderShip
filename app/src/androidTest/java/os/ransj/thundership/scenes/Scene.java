@@ -16,6 +16,8 @@ public interface Scene {
     int INFINITE_PRIZE = 6;
     int INFINITE_RESULT = 7;
     int INFINITE_BATTLE = 8;
+    int INFINITE_DAILYAWARD = 9;
+    int INFINITE_NOTICE = 10;
 
     boolean analysis(Bitmap image);
 

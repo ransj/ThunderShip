@@ -92,6 +92,14 @@ public class ColorPickerRunner {
                 y = mDevice.getDisplayHeight()>>1;
                 height = mDevice.getDisplayHeight()>>1;
                 configName = Constants.CONFIG_NAME_RESULT;
+            } else if (Constants.IMAGE_NAME_DAILY_AWARD.equals(scene)) {
+                height = 480;
+                y = mDevice.getDisplayHeight() - 880;
+                configName = Constants.CONFIG_NAME_DAILY_AWARD;
+            } else if (Constants.IMAGE_NAME_NOTICE.equals(scene)) {
+                height = 330;
+                y = mDevice.getDisplayHeight() - 700;
+                configName = Constants.CONFIG_NAME_NOTICE;
             } else {
                 Log.d("ColorPickerRunner", "error handler image "+scene);
                 continue;
