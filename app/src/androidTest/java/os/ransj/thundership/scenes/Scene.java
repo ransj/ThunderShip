@@ -18,6 +18,10 @@ public interface Scene {
     int INFINITE_BATTLE = 8;
     int INFINITE_DAILYAWARD = 9;
     int INFINITE_NOTICE = 10;
+    int INFINITE_DAILYAWARD_ACCEPT = 11;
+
+    int WPK_ENTRY = 12;
+    int WPK_BUY = 13;
 
     boolean analysis(Bitmap image);
 

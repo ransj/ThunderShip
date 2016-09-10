@@ -80,6 +80,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
         mScenes.add(new SceneResult());
         mScenes.add(new SceneBattle());
         mScenes.add(new SceneDailyAward());
+        mScenes.add(new SceneDailyAwardAccept());
         mScenes.add(new SceneNotice());
         mChanges = new ArrayList<>();
     }

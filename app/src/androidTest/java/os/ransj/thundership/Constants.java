@@ -48,6 +48,11 @@ public class Constants {
      * 公告
      */
     public static final String IMAGE_NAME_NOTICE = "notice.png";
+    /**
+     * 确认每日奖励
+     */
+    public static final String IMAGE_NAME_DAILYAWARD_ACCEPT = "dailyAwardAccept.png";
+
 
     /**
      * 首页文件
@@ -93,6 +98,10 @@ public class Constants {
      * 公告
      */
     public static final String CONFIG_NAME_NOTICE = "notice.txt";
+    /**
+     * 确认每日奖励
+     */
+    public static final String CONFIG_NAME_DAILYAWARD_ACCEPT = "dailyAwardAccept.txt";
 
 
     public static final int SHIP_SIZE = 180;
