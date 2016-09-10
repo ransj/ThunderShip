@@ -106,6 +106,8 @@ public class ColorPickerRunner {
                 height = 330;
                 y = mDevice.getDisplayHeight() - 700;
                 configName = Constants.CONFIG_NAME_NOTICE;
+            } else if (Constants.IMAGE_NAME_WPK_ENTRY.equals(scene)) {
+                configName = Constants.CONFIG_NAME_WPK_ENTRY;
             } else {
                 Log.d("ColorPickerRunner", "error handler image "+scene);
                 continue;

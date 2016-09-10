@@ -52,6 +52,10 @@ public class Constants {
      * 确认每日奖励
      */
     public static final String IMAGE_NAME_DAILYAWARD_ACCEPT = "dailyAwardAccept.png";
+    /**
+     * 世界竞赛选场
+     */
+    public static final String IMAGE_NAME_WPK_ENTRY = "wpkEntry.png";
 
 
     /**
@@ -102,7 +106,10 @@ public class Constants {
      * 确认每日奖励
      */
     public static final String CONFIG_NAME_DAILYAWARD_ACCEPT = "dailyAwardAccept.txt";
-
+    /**
+     * 世界竞赛选场
+     */
+    public static final String CONFIG_NAME_WPK_ENTRY = "wpkEntry.txt";
 
     public static final int SHIP_SIZE = 180;
 
