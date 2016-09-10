@@ -3,6 +3,7 @@ package os.ransj.thundership.actions;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
 import android.support.test.uiautomator.UiDevice;
 
@@ -20,6 +21,7 @@ public class BattleActor implements Handler.Callback {
     private List<Action> mActions;
     private ShipLocation mShipLocation;
     private UiDevice mDevice;
+    private boolean mIsIdle = true;
 
     public BattleActor(UiDevice device) {
         mDevice = device;
@@ -38,7 +40,9 @@ public class BattleActor implements Handler.Callback {
         switch (msg.what) {
             case MSG_ID_IMAGE:
                 Bitmap image = (Bitmap) msg.obj;
+                msg.obj = null;
                 inspectBattle(image);
+                mIsIdle = true;
                 break;
             case MSG_ID_ININT:
                 init();
@@ -53,15 +57,21 @@ public class BattleActor implements Handler.Callback {
     }
 
     public void dealBattle(Bitmap image){
-        Message msg = Message.obtain();
-        msg.what = MSG_ID_IMAGE;
-        msg.obj = image;
-        mHandler.sendMessage(msg);
+        if (mIsIdle) {
+            mIsIdle = false;
+            Message msg = Message.obtain();
+            msg.what = MSG_ID_IMAGE;
+            msg.obj = image;
+            mHandler.sendMessage(msg);
+        } else {
+            image.recycle();
+        }
     }
 
     private void inspectBattle(Bitmap image) {
         for(Action action : mActions){
-            action.processLocation(image, mDevice, mShipLocation);
+            action.processLocation(image, mDevice, mShipLocation, mHandler);
         }
+        image.recycle();
     }
 }

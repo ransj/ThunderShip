@@ -75,6 +75,9 @@ final class SceneActor implements Handler.Callback {
             case Scene.WPK_ENTRY:
                 click(mScreenWidth >> 1, 1320, Gravity.LEFT, Gravity.TOP);
                 break;
+            case Scene.WPK_BUY:
+                click(mScreenWidth >> 1, 280, Gravity.LEFT, Gravity.BOTTOM);
+                break;
         }
         return true;
     }

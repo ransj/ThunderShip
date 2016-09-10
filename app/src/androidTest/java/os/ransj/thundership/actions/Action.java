@@ -1,6 +1,7 @@
 package os.ransj.thundership.actions;
 
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.support.test.uiautomator.UiDevice;
 
 /**
@@ -8,6 +9,6 @@ import android.support.test.uiautomator.UiDevice;
  */
 interface Action {
 
-    void processLocation(Bitmap image, UiDevice device, ShipLocation location);
+    void processLocation(Bitmap image, UiDevice device, ShipLocation location, Handler handler);
 
 }

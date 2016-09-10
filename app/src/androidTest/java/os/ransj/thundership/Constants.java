@@ -56,6 +56,10 @@ public class Constants {
      * 世界竞赛选场
      */
     public static final String IMAGE_NAME_WPK_ENTRY = "wpkEntry.png";
+    /**
+     * 世界竞赛购买
+     */
+    public static final String IMAGE_NAME_WPK_BUY = "wpkBuy.png";
 
 
     /**
@@ -110,6 +114,10 @@ public class Constants {
      * 世界竞赛选场
      */
     public static final String CONFIG_NAME_WPK_ENTRY = "wpkEntry.txt";
+    /**
+     * 世界竞赛购买
+     */
+    public static final String CONFIG_NAME_WPK_BUY = "wpkBuy.txt";
 
     public static final int SHIP_SIZE = 180;
 

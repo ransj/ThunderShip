@@ -38,7 +38,7 @@ public class ThunderShipRunner implements ScreenshotTaker.ScreenshotListener, Sc
         int marginBottom = device.getDisplayHeight() - InstrumentationRegistry.getContext().getResources().getDisplayMetrics().heightPixels;
         mSceneActor = new SceneActor(device, marginBottom);
         mSceneActor.start();
-        new ScreenshotTaker(instrumentation.getUiAutomation(), 5000, this).start();
+        new ScreenshotTaker(instrumentation.getUiAutomation(), -1, this).start();
         mAnalysis = new ScreenshotAnalysis(this);
         mAnalysis.start();
         mBattleActor = new BattleActor(device);
@@ -62,6 +62,7 @@ public class ThunderShipRunner implements ScreenshotTaker.ScreenshotListener, Sc
 
     @Override
     public void onBattle(Bitmap image) {
+        Log.d("ThunderShipRunner", "onBattle ");
         mBattleActor.dealBattle(image);
     }
 

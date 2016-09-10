@@ -108,6 +108,8 @@ public class ColorPickerRunner {
                 configName = Constants.CONFIG_NAME_NOTICE;
             } else if (Constants.IMAGE_NAME_WPK_ENTRY.equals(scene)) {
                 configName = Constants.CONFIG_NAME_WPK_ENTRY;
+            } else if (Constants.IMAGE_NAME_WPK_BUY.equals(scene)) {
+                configName = Constants.CONFIG_NAME_WPK_BUY;
             } else {
                 Log.d("ColorPickerRunner", "error handler image "+scene);
                 continue;
