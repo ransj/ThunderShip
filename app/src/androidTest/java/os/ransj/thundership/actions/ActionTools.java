@@ -38,7 +38,7 @@ class ActionTools {
         int[] values = new int[height];
         int[] values2 = new int[height];
         image.getPixels(values, 0, 1, x, y, 1, height);
-        image.getPixels(values2, 0, 1, x - 10, y, 1, height);
+        image.getPixels(values2, 0, 1, x + 10, y, 1, height);
         long count = 0;
         long count2 = 0;
         for (int i = 0; i < height; i++) {

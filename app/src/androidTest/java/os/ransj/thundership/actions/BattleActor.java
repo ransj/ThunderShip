@@ -74,7 +74,7 @@ public class BattleActor implements Handler.Callback {
         for(Action action : mActions){
             action.processLocation(image, mDevice, mShipLocation, mHandler);
         }
-        Log.d("BattleActor", "success inspectBattle cost time" + (System.currentTimeMillis() - start));
+        Log.d("BattleActor", "success inspectBattle cost time " + (System.currentTimeMillis() - start));
         image.recycle();
     }
 }
