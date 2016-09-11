@@ -17,6 +17,7 @@ import os.ransj.thundership.Constants;
  * Created by ransj on 9/3/16.
  */
 class MissileAction implements Action {
+    private long mLastMoveTime;
 
     @Override
     public void processLocation(Bitmap image, final UiDevice device, final ShipLocation location, Handler handler) {
@@ -32,6 +33,13 @@ class MissileAction implements Action {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    // wait for last move to complete
+                    if(mLastMoveTime > 0){
+                        for (;mLastMoveTime + 20 * 5 > System.currentTimeMillis(); ) {
+                            Thread.yield();
+                        }
+                    }
+                    mLastMoveTime = System.currentTimeMillis();
                     device.swipe(location.mX, location.mY, device.getDisplayWidth() >> 1, location.mY, 20);
                     location.mX = device.getDisplayWidth() >> 1;
                 }
