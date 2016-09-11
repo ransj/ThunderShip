@@ -40,10 +40,12 @@ public class BattleActor implements Handler.Callback {
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case MSG_ID_IMAGE:
-                mIsIdle = true;
-                Bitmap image = (Bitmap) msg.obj;
-                msg.obj = null;
-                inspectBattle(image);
+                synchronized (BattleActor.this){
+                    mIsIdle = true;
+                    Bitmap image = (Bitmap) msg.obj;
+                    msg.obj = null;
+                    inspectBattle(image);
+                }
                 break;
             case MSG_ID_ININT:
                 init();
@@ -58,14 +60,16 @@ public class BattleActor implements Handler.Callback {
     }
 
     public void dealBattle(Bitmap image){
-        if (mIsIdle) {
-            mIsIdle = false;
-            Message msg = Message.obtain();
-            msg.what = MSG_ID_IMAGE;
-            msg.obj = image;
-            mHandler.sendMessage(msg);
-        } else {
-            image.recycle();
+        synchronized (BattleActor.this){
+            if (mIsIdle) {
+                mIsIdle = false;
+                Message msg = Message.obtain();
+                msg.what = MSG_ID_IMAGE;
+                msg.obj = image;
+                mHandler.sendMessage(msg);
+            } else {
+                image.recycle();
+            }
         }
     }
 
