@@ -6,6 +6,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.support.test.uiautomator.UiDevice;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +40,10 @@ public class BattleActor implements Handler.Callback {
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case MSG_ID_IMAGE:
+                mIsIdle = true;
                 Bitmap image = (Bitmap) msg.obj;
                 msg.obj = null;
                 inspectBattle(image);
-                mIsIdle = true;
                 break;
             case MSG_ID_ININT:
                 init();
@@ -69,9 +70,11 @@ public class BattleActor implements Handler.Callback {
     }
 
     private void inspectBattle(Bitmap image) {
+        long start = System.currentTimeMillis();
         for(Action action : mActions){
             action.processLocation(image, mDevice, mShipLocation, mHandler);
         }
+        Log.d("BattleActor", "success inspectBattle cost time" + (System.currentTimeMillis() - start));
         image.recycle();
     }
 }

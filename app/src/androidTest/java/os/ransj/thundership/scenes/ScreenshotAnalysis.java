@@ -50,6 +50,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case MSG_ANALYSIS:
+                mIsIdle = true;
                 long start = System.currentTimeMillis();
                 Bitmap image = (Bitmap) msg.obj;
                 msg.obj = null;
@@ -67,7 +68,6 @@ public final class ScreenshotAnalysis implements Handler.Callback {
                     mChanges.clear();
                     image.recycle();
                 }
-                mIsIdle = true;
                 break;
             case MSG_INIT:
                 init();
