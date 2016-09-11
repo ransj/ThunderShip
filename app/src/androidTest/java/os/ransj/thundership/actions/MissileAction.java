@@ -18,6 +18,7 @@ import os.ransj.thundership.Constants;
  */
 class MissileAction implements Action {
     private long mLastMoveTime;
+    private Runnable mLastRunable;
 
     @Override
     public void processLocation(Bitmap image, final UiDevice device, final ShipLocation location, Handler handler) {
@@ -30,7 +31,10 @@ class MissileAction implements Action {
             Log.d("MissileAction", "rocket found, move  "+move);
             device.swipe(location.mX, location.mY, location.mX - move, location.mY, 20);
             location.mX -= move;
-            handler.postDelayed(new Runnable() {
+            if(mLastRunable != null){
+                handler.removeCallbacks(mLastRunable);
+            }
+            mLastRunable = new Runnable() {
                 @Override
                 public void run() {
                     // wait for last move to complete
@@ -43,7 +47,8 @@ class MissileAction implements Action {
                     device.swipe(location.mX, location.mY, device.getDisplayWidth() >> 1, location.mY, 20);
                     location.mX = device.getDisplayWidth() >> 1;
                 }
-            }, 10000);
+            };
+            handler.postDelayed(mLastRunable, 10000);
         }
     }
 
