@@ -35,7 +35,6 @@ public final class ScreenshotAnalysis implements Handler.Callback {
     }
 
     public void analysis(Bitmap image) {
-        synchronized (ScreenshotAnalysis.this){
             if (mIsIdle) {
                 mIsIdle = false;
                 Message msg = new Message();
@@ -45,16 +44,12 @@ public final class ScreenshotAnalysis implements Handler.Callback {
             } else {
                 image.recycle();
             }
-        }
     }
 
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
             case MSG_ANALYSIS:
-                synchronized (ScreenshotAnalysis.this){
-                    mIsIdle = true;
-                }
                 long start = System.currentTimeMillis();
                 Bitmap image = (Bitmap) msg.obj;
                 msg.obj = null;
@@ -72,6 +67,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
                     mChanges.clear();
                     image.recycle();
                 }
+                mIsIdle = true;
                 break;
             case MSG_INIT:
                 init();

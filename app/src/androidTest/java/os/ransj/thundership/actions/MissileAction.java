@@ -17,11 +17,20 @@ import os.ransj.thundership.Constants;
  * Created by ransj on 9/3/16.
  */
 class MissileAction implements Action {
-    private long mLastMoveTime;
     private Runnable mLastRunable;
+    private boolean mBackCenter;
+    private boolean mCanMove = true;
 
     @Override
     public void processLocation(Bitmap image, final UiDevice device, final ShipLocation location, Handler handler) {
+        if (mBackCenter) {
+            mBackCenter = false;
+            backToCenter(image, device, location);
+            return;
+        }
+        if (!mCanMove) {
+            return;
+        }
         int move = 0;
         int y = device.getDisplayHeight() - 142;
         while (ActionTools.isMissleArea(image, location.mX - move, y, 100)) {
@@ -30,25 +39,32 @@ class MissileAction implements Action {
         if (move > 0) {
             Log.d("MissileAction", "rocket found, move  "+move);
             device.swipe(location.mX, location.mY, location.mX - move, location.mY, 20);
+            mCanMove = false;
             location.mX -= move;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mCanMove = true;
+                }
+            }, 400);
             if(mLastRunable != null){
                 handler.removeCallbacks(mLastRunable);
             }
             mLastRunable = new Runnable() {
                 @Override
                 public void run() {
-                    // wait for last move to complete
-                    if(mLastMoveTime > 0){
-                        for (;mLastMoveTime + 20 * 5 > System.currentTimeMillis(); ) {
-                            Thread.yield();
-                        }
-                    }
-                    mLastMoveTime = System.currentTimeMillis();
-                    device.swipe(location.mX, location.mY, device.getDisplayWidth() >> 1, location.mY, 20);
-                    location.mX = device.getDisplayWidth() >> 1;
+                    mBackCenter = true;
                 }
             };
             handler.postDelayed(mLastRunable, 10000);
+        }
+    }
+
+    private void backToCenter(Bitmap image, UiDevice device, ShipLocation location) {
+        int y = device.getDisplayHeight() - 142;
+        if(!ActionTools.isMissleArea(image, device.getDisplayWidth() >> 1, y, 100)){
+            device.swipe(location.mX, location.mY, device.getDisplayWidth() >> 1, location.mY, 20);
+            location.mX = device.getDisplayWidth() >> 1;
         }
     }
 
