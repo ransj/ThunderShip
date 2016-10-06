@@ -24,8 +24,7 @@ class MissileAction implements Action {
     @Override
     public void processLocation(Bitmap image, final UiDevice device, final ShipLocation location, Handler handler) {
         if (mBackCenter) {
-            mBackCenter = false;
-            backToCenter(image, device, location);
+            backToCenter(image, device, location, handler);
             return;
         }
         if (!mCanMove) {
@@ -61,11 +60,19 @@ class MissileAction implements Action {
         }
     }
 
-    private void backToCenter(Bitmap image, UiDevice device, ShipLocation location) {
+    private void backToCenter(Bitmap image, final UiDevice device, final ShipLocation location, Handler handler) {
         int y = device.getDisplayHeight() - 142;
         if(!ActionTools.isMissleArea(image, device.getDisplayWidth() >> 1, y, 100)){
             device.swipe(location.mX, location.mY, device.getDisplayWidth() >> 1, location.mY, 20);
-            location.mX = device.getDisplayWidth() >> 1;
+            mBackCenter = false;
+            mCanMove = false;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    location.mX = device.getDisplayWidth() >> 1;
+                    mCanMove = true;
+                }
+            }, 150);
         }
     }
 
