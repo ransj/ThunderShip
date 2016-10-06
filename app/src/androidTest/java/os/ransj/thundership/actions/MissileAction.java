@@ -40,13 +40,14 @@ class MissileAction implements Action {
             Log.d("MissileAction", "rocket found, move  "+move);
             device.swipe(location.mX, location.mY, location.mX - move, location.mY, 20);
             mCanMove = false;
-            location.mX -= move;
+            final int finalMove = move;
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    location.mX -= finalMove;
                     mCanMove = true;
                 }
-            }, 400);
+            }, 150);
             if(mLastRunable != null){
                 handler.removeCallbacks(mLastRunable);
             }

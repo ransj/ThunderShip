@@ -54,7 +54,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
                 Bitmap image = (Bitmap) msg.obj;
                 msg.obj = null;
                 int scene = analysisBitmap(image);
-                Log.d("ThunderShipRunner", "success analysis scene, cost time " + (System.currentTimeMillis() - start));
+                Log.d("ThunderShipRunner", "success analysis scene "+scene+" , cost time " + (System.currentTimeMillis() - start));
                 if (Scene.INFINITE_BATTLE == scene) {
                     mScene = scene;
                     mListener.onBattle(image);
