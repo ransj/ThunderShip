@@ -22,6 +22,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
     private List<Scene> mChanges;
     private int mScene = -1;
     private boolean mIsIdle = true;
+    private int mIdleCount;
 
     public ScreenshotAnalysis(ScreenshotAnalysisListener listener) {
         mListener = listener;
@@ -42,7 +43,12 @@ public final class ScreenshotAnalysis implements Handler.Callback {
                 msg.obj = image;
                 mHandler.sendMessage(msg);
             } else {
+                mIdleCount++;
                 image.recycle();
+                if (mIdleCount > 10) {
+                    mIdleCount = 0;
+                    mIsIdle = true;
+                }
             }
     }
 

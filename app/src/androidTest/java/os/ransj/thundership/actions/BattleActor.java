@@ -23,6 +23,7 @@ public class BattleActor implements Handler.Callback {
     private ShipLocation mShipLocation;
     private UiDevice mDevice;
     private boolean mIsIdle = true;
+    private int mIdleCount;
 
     public BattleActor(UiDevice device) {
         mDevice = device;
@@ -65,7 +66,12 @@ public class BattleActor implements Handler.Callback {
             msg.obj = image;
             mHandler.sendMessage(msg);
         } else {
+            mIdleCount++;
             image.recycle();
+            if (mIdleCount > 10) {
+                mIdleCount = 0;
+                mIsIdle = true;
+            }
         }
     }
 
