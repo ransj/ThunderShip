@@ -22,7 +22,7 @@ class MissileAction implements Action {
     private boolean mCanMove = true;
 
     @Override
-    public void processLocation(Bitmap image, final UiDevice device, final ShipLocation location, Handler handler) {
+    public void processLocation(Bitmap image, final UiDevice device, final ShipLocation location, final Handler handler) {
         if (mBackCenter) {
             backToCenter(image, device, location, handler);
             return;
@@ -46,7 +46,7 @@ class MissileAction implements Action {
                     location.mX -= finalMove;
                     mCanMove = true;
                 }
-            }, 150);
+            }, 200);
             if(mLastRunable != null){
                 handler.removeCallbacks(mLastRunable);
             }
@@ -72,7 +72,7 @@ class MissileAction implements Action {
                     location.mX = device.getDisplayWidth() >> 1;
                     mCanMove = true;
                 }
-            }, 150);
+            }, 200);
         }
     }
 

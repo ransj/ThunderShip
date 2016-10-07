@@ -46,6 +46,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
                 mIdleCount++;
                 image.recycle();
                 if (mIdleCount > 10) {
+                    mHandler.removeMessages(MSG_ANALYSIS);
                     mIdleCount = 0;
                     mIsIdle = true;
                 }

@@ -69,6 +69,7 @@ public class BattleActor implements Handler.Callback {
             mIdleCount++;
             image.recycle();
             if (mIdleCount > 10) {
+                mHandler.removeMessages(MSG_ID_IMAGE);
                 mIdleCount = 0;
                 mIsIdle = true;
             }
