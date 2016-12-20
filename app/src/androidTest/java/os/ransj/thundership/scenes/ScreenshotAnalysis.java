@@ -87,6 +87,7 @@ public final class ScreenshotAnalysis implements Handler.Callback {
         mScenes = new ArrayList<>();
         mScenes.add(new SceneMainEntry());
         mScenes.add(new SceneFriendRace());
+        mScenes.add(new SceneFriendRaceMove());
         mScenes.add(new SceneFriendRank());
         mScenes.add(new SceneFriendPick());
         mScenes.add(new SceneBuy());

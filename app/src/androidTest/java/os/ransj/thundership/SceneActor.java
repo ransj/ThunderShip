@@ -18,6 +18,7 @@ final class SceneActor implements Handler.Callback {
     private UiDevice mDevice;
     private int mScreenWidth;
     private int mScreenHeight;
+    private int mCurrentScene = Integer.MIN_VALUE;
 
     public SceneActor(UiDevice device, int marginBottom){
         mMarginBottom = marginBottom;
@@ -33,7 +34,10 @@ final class SceneActor implements Handler.Callback {
     }
 
     public void dealSence(int scene) {
-        mHandler.sendEmptyMessageDelayed(scene, 100);
+        if (mCurrentScene != scene) {
+            mCurrentScene = scene;
+            mHandler.sendEmptyMessageDelayed(scene, 100);
+        }
     }
 
     @Override
@@ -43,7 +47,10 @@ final class SceneActor implements Handler.Callback {
                 click(325, 163, Gravity.LEFT, Gravity.BOTTOM);
                 break;
             case Scene.INFINITE_FRIEND_RACE:
-                click(mScreenWidth >> 1, 400, Gravity.LEFT, Gravity.BOTTOM);
+                mDevice.swipe(mScreenWidth >> 1, mScreenHeight, mScreenWidth >> 1, mScreenHeight - 180, 20);
+                break;
+            case Scene.INFINITE_FRIEND_RACE_MOVE:
+                click(mScreenWidth >> 1, 1055, Gravity.LEFT, Gravity.BOTTOM);
                 break;
             case Scene.INFINITE_FRIEND_RANK:
                 click(mScreenWidth >> 1, 280, Gravity.LEFT, Gravity.BOTTOM);

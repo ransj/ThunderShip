@@ -13,6 +13,10 @@ public class Constants {
      */
     public static final String IMAGE_NAME_FRIEND_RACE = "friendRace.png";
     /**
+     * 好友竞赛上滑
+     */
+    public static final String IMAGE_NAME_FRIEND_RACE_MOVE = "friendRaceMove.png";
+    /**
      * 好友排行
      */
     public static final String IMAGE_NAME_FRIEND_RANK = "friendRank.png";
@@ -70,6 +74,10 @@ public class Constants {
      * 好友竞赛
      */
     public static final String CONFIG_NAME_FRIEND_RACE = "friendRace.txt";
+    /**
+     * 好友竞赛上滑
+     */
+    public static final String CONFIG_NAME_FRIEND_RACE_MOVE = "friendRaceMove.txt";
     /**
      * 好友排行
      */

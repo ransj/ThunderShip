@@ -59,6 +59,9 @@ public class ColorPickerRunner {
             } else if (Constants.IMAGE_NAME_FRIEND_RACE.equals(scene)) {
                 //DO NOTHING
                 configName = Constants.CONFIG_NAME_FRIEND_RACE;
+            } else if (Constants.IMAGE_NAME_FRIEND_RACE_MOVE.equals(scene)) {
+                //DO NOTHING
+                configName = Constants.CONFIG_NAME_FRIEND_RACE_MOVE;
             } else if (Constants.IMAGE_NAME_FRIEND_RANK.equals(scene)) {
                 height = 650;
                 y = mDevice.getDisplayHeight() - height;
@@ -103,7 +106,7 @@ public class ColorPickerRunner {
                 y = (mDevice.getDisplayHeight() - height) >> 1;
                 configName = Constants.CONFIG_NAME_DAILYAWARD_ACCEPT;
             } else if (Constants.IMAGE_NAME_NOTICE.equals(scene)) {
-                height = 330;
+                height = 320;
                 y = mDevice.getDisplayHeight() - 700;
                 configName = Constants.CONFIG_NAME_NOTICE;
             } else if (Constants.IMAGE_NAME_WPK_ENTRY.equals(scene)) {
